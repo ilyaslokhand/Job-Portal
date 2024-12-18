@@ -7,7 +7,7 @@ import { Heart, MapPinIcon, Trash2Icon, TrashIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import useFetch from "@/Hooks/useFetch";
-import { saveJob } from "@/Api/ApiJobs";
+import { deleteJob, saveJob } from "@/Api/ApiJobs";
 
 const Jobcard = ({
   datajob = {},
@@ -23,6 +23,12 @@ const Jobcard = ({
     loading: loadingSavedJob,
   } = useFetch(saveJob);
 
+  const { loading: loadingDeleteJob, fn: fnDeleteJob } = useFetch(deleteJob, {
+    job_id: datajob.id,
+  });
+
+  console.log("Job ID to delete:", datajob.id);
+
   const { user } = useUser();
 
   const handleSaveJob = async () => {
@@ -34,10 +40,10 @@ const Jobcard = ({
     onJobAction();
   };
 
-  // const handleDeleteJob = async () => {
-  //   await fnDeleteJob();
-  //   onJobAction();
-  // };
+  const handleDeleteJob = async () => {
+    await fnDeleteJob(); // Call delete API
+    onJobAction(); // Trigger state update in parent component
+  };
 
   useEffect(() => {
     if (savedJob !== undefined) setsaved(savedJob?.length > 0);
@@ -54,7 +60,14 @@ const Jobcard = ({
       <CardHeader className="flex">
         <CardTitle className="flex justify-between font-bold">
           {datajob.title}
-          {isMyJob && <Trash2Icon fill="red" size={18} />}
+          {!isMyJob && (
+            <Trash2Icon
+              fill="red"
+              size={18}
+              className="text-red-300 cursor-pointer"
+              onClick={handleDeleteJob}
+            />
+          )}
         </CardTitle>
       </CardHeader>
       <CardContent

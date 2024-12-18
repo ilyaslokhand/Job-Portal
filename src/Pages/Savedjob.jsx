@@ -37,7 +37,7 @@ const Savedjob = () => {
               <Jobcard
                 key={saved.id}
                 savedInit={true}
-                job={saved?.job}
+                datajob={saved?.datajob}
                 onJobAction={fngetSavedjobs}
               />
             ))

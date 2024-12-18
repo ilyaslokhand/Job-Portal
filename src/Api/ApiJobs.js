@@ -108,3 +108,25 @@ export async function addNewJob(token, _, JobData) {
   }
   return data;
 }
+
+// Delete job
+export async function deleteJob(token, { job_id }) {
+  const supabase = await superbaseclinet(token);
+
+  console.log("Attempting to delete job with ID:", job_id);
+
+  const { data, error: deleteError } = await supabase
+    .from("Jobs") // Correct table name with capital "J"
+    .delete()
+    .eq("id", parseInt(job_id, 10)) // Ensure ID is the correct type
+    .select();
+
+  if (deleteError) {
+    console.error("Error deleting job:", deleteError);
+    throw new Error(deleteError.message);
+  }
+
+  console.log("Delete response data:", data);
+
+  return data;
+}
