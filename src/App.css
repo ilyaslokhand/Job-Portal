@@ -24,3 +24,18 @@
   height: 100%;
   background: radial-gradient(circle, transparent, rgba(0, 0, 0, 0.9));
 }
+
+.wmde-markdown {
+  background-color: transparent !important;
+}
+
+.wmde-markdown ul {
+  list-style-type: disc;
+  padding-left: 25px;
+  color: white;
+}
+
+.w-md-editor {
+  background-color: transparent !important;
+  color: white !important;
+}

@@ -5,7 +5,7 @@ import Landingpage from "./Pages/Landingpage";
 import Onboarding from "./Pages/Onboarding";
 import Myjob from "./Pages/Myjob";
 import Joblisting from "./Pages/Joblisting";
-import Job from "./Pages/Job";
+import JobPage from "./Pages/Job";
 import Savedjob from "./Pages/Savedjob";
 import Postjob from "./Pages/Postjob";
 import { ThemeProvider } from "./components/Theme-provider";
@@ -48,7 +48,7 @@ const router = createBrowserRouter([
         path: "/Job/:id",
         element: (
           <ProtectedRoute>
-            <Job />
+            <JobPage />
           </ProtectedRoute>
         ),
       },
