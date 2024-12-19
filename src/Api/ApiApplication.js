@@ -38,17 +38,33 @@ export async function ApplyToJob(token, _, jobData) {
   return data;
 }
 
-export async function updateappliations(token, { job_id }, status) {
+export async function updateappliations(token, { Job_id }, status) {
   const superbase = await superbaseclinet(token);
 
   const { data, error } = await superbase
     .from("Application")
     .update({ status })
-    .eq("job_id", job_id)
+    .eq("job_id", Job_id)
     .select("");
 
   if (error || data.length == 0) {
     console.log("Error updating application status:", error);
+    return null;
+  }
+  return data;
+}
+
+export async function getApplications(token, { user_id }) {
+  const superbase = await superbaseclinet(token);
+
+  const { data, error } = await superbase
+    .from("Application")
+    .select("*, Jobs:Jobs(title,company:Compaines(name))")
+    .eq("Candidate_id", user_id);
+
+  console.log("API response:", data); // Log the data to inspect the structure
+  if (error) {
+    console.log("Error fetching applications:", error);
     return null;
   }
   return data;

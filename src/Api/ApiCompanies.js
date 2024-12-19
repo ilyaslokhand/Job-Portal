@@ -54,10 +54,27 @@ export async function getSavedjobs(token) {
 
   const { data, error } = await superbase
     .from("SavedJobs")
-    .select("*, job:Jobs(*,company:Compaines(name,logo_url) )");
+
+    .select("*, Jobs:Jobs(*,company:Compaines(name,logo_url) )");
 
   if (error) {
     console.log("Error fectching SavedJobs:", error);
+    return null;
+  }
+  return data;
+}
+
+export async function getmyjobs(token, { Recruiter_id }) {
+  const superbase = await superbaseclinet(token);
+
+  const { data, error } = await superbase
+    .from("Jobs")
+
+    .select("*, company:Compaines(name,logo_url)")
+    .eq("Recruiter_id", Recruiter_id);
+
+  if (error) {
+    console.log("Error fectching Jobs:", error);
     return null;
   }
   return data;

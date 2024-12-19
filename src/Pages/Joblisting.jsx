@@ -145,12 +145,11 @@ const Joblisting = () => {
         <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {currentJobs?.length ? (
             currentJobs.map((datajob) => (
-              <div key={datajob.id}>
-                <Jobcard
-                  datajob={datajob}
-                  savedInit={datajob?.saved?.length > 0}
-                />
-              </div>
+              <Jobcard
+                key={datajob.id}
+                datajob={datajob}
+                savedInit={datajob?.saved?.length > 0}
+              />
             ))
           ) : (
             <p>No jobs available</p>

@@ -62,7 +62,7 @@ const ApplyJobDrawer = ({ user, datajobs, applied = false, fetchJob }) => {
     fnapplyjob({
       ...data,
       resumes: file,
-      job_id: datajobs.id,
+      Job_id: datajobs.id,
       Candidate_id: user.id,
       Name: user.fullName,
       status: "Applied",

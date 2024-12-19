@@ -31,13 +31,13 @@ const JobPage = () => {
     fn: fnjobs,
     data: datajobs,
     loading: loadingjobs,
-  } = UseFetch(getSingleJob, { job_id: id });
+  } = UseFetch(getSingleJob, { Job_id: id });
 
   const {
     fn: fnHiringStatus,
 
     loading: loadingHiringStatus,
-  } = UseFetch(UpdateHiringStatus, { job_id: id });
+  } = UseFetch(UpdateHiringStatus, { Job_id: id });
 
   const HandleStatusChange = (value) => {
     const isOpen = value === "Open";
@@ -65,13 +65,13 @@ const JobPage = () => {
         <img
           src={datajobs?.company?.logo_url}
           style={{ height: "48px" }}
-          alt={datajobs?.title}
+          alt={datajobs?.location}
         />
       </div>
       <div className="flex justify-between">
         <div className="flex gap-2">
           <MapPinIcon />
-          {datajobs?.Location}
+          {datajobs?.location}
         </div>
         <div className="flex gap-2">
           <Briefcase />

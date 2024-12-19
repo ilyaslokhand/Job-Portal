@@ -38,7 +38,7 @@ const ApplicationCard = ({ application, isCandidate = false }) => {
     error: errorupdateappliations,
     loading: loadingupdateappliations,
   } = useFetch(updateappliations, {
-    job_id: application.job_id,
+    Job_id: application.job_id,
   });
 
   const handlestatuschange = (status) => {
@@ -51,8 +51,9 @@ const ApplicationCard = ({ application, isCandidate = false }) => {
       <CardHeader>
         <CardTitle className="flex justify-between font-bold">
           {isCandidate
-            ? `${application?.datajobs?.title} at ${application?.datajobs?.Compaines?.Name}`
+            ? `${application?.Jobs?.title} at ${application?.Jobs?.company?.name}`
             : application?.Name}
+
           <Download
             size={18}
             className="bg-white text-black rounded-full h-8 w-8 p-1.5 cursor-pointer"

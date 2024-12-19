@@ -11,7 +11,7 @@ const Savedjob = () => {
   const {
     fn: fngetSavedjobs,
     error: errorgetSavedjobs,
-    data: datagetSavedjobs,
+    data: SavedJobs,
     loading: loadinggetSavedjobs,
   } = useFetch(getSavedjobs);
 
@@ -20,6 +20,12 @@ const Savedjob = () => {
       fngetSavedjobs();
     }
   }, [isLoaded]);
+
+  useEffect(() => {
+    if (SavedJobs) {
+      console.log(SavedJobs); // Log the fetched SavedJobs data to verify its structure
+    }
+  }, [SavedJobs]);
 
   if (!isLoaded || loadinggetSavedjobs) {
     return <BarLoader className="mb-4" width={"100%"} color="#36d7b7" />;
@@ -32,12 +38,12 @@ const Savedjob = () => {
       </h1>
       {loadinggetSavedjobs === false && (
         <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {datagetSavedjobs?.length ? (
-            datagetSavedjobs.map((saved) => (
+          {SavedJobs?.length ? (
+            SavedJobs.map((saved) => (
               <Jobcard
                 key={saved.id}
                 savedInit={true}
-                datajob={saved?.datajob}
+                datajob={saved?.Jobs}
                 onJobAction={fngetSavedjobs}
               />
             ))
